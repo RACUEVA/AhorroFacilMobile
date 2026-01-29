@@ -1,71 +1,70 @@
-AhorroFácil Mobile 📱
-Este es un nuevo proyecto de React Native, creado utilizando @react-native-community/cli.
+# AhorroFácil – Gestor Inteligente de Finanzas Personales 💰
+Este proyecto es una aplicación multiplataforma desarrollada en React Native (Frontend) y Flask (Backend), diseñada para ayudar a los usuarios a controlar su presupuesto mensual mediante una arquitectura de datos centralizada.
 
-Guía de Inicio
-Nota: Asegúrate de haber completado la guía de Configuración del Entorno antes de continuar.
+# Estructura del Proyecto 📂
 
-Paso 1: Iniciar Metro
-Primero, deberás ejecutar Metro, la herramienta de compilación de JavaScript para React Native.
+Para garantizar la integridad y sincronización de los datos, el proyecto se organiza de la siguiente manera:
 
-Para iniciar el servidor de desarrollo de Metro, ejecuta el siguiente comando desde la raíz de tu proyecto:
+> **Backend (PROYECTO/): Fuente principal de datos remota..**
 
-Bash
-# Usando npm
-npm start
+*app.py*: Servidor Flask que gestiona la API y la lógica de autenticación.
 
-# O usando Yarn
-yarn start
-Paso 2: Compilar y ejecutar tu aplicación
-Con Metro ejecutándose, abre una nueva ventana de terminal desde la raíz de tu proyecto y utiliza uno de los siguientes comandos para compilar y ejecutar tu aplicación en Android o iOS:
+*models_user.py*: Definición de la base de datos (Usuarios y Roles).
 
-Android
-Bash
-# Usando npm
-npm run android
+*ahorro_facil.db*: Base de datos SQLite persistente.
 
-# O usando Yarn
-yarn android
-iOS
-Para iOS, recuerda instalar las dependencias de CocoaPods (esto solo debe ejecutarse en la primera clonación o después de actualizar dependencias nativas).
+*.env*: Variables de entorno para configuración sensible.
 
-La primera vez que crees un proyecto nuevo, ejecuta el instalador de Ruby para instalar CocoaPods:
 
-Bash
-bundle install
-Luego, y cada vez que actualices tus dependencias nativas, ejecuta:
+> ** Frontend (AhorroFacilMobile/): **
 
-Bash
-bundle exec pod install
-Para más información, visita la guía de inicio de CocoaPods.
+*App.tsx*: Interfaz de usuario con lógica de registro, login y vista protegida.
 
-Bash
-# Usando npm
-npm run ios
 
-# O usando Yarn
-yarn ios
-Si todo está configurado correctamente, deberías ver tu nueva aplicación ejecutándose en el Emulador de Android, el Simulador de iOS o en tu dispositivo conectado.
 
-Paso 3: Modificar tu aplicación
-¡Ahora que has ejecutado la aplicación con éxito, puedes realizar cambios!
+## Configuración del Entorno (.env)
+En la raíz de la carpeta PROYECTO/, se debe configurar el archivo .env con los siguientes parámetros:
 
-Abre App.tsx en tu editor de texto y realiza modificaciones. Cuando guardes, la aplicación se actualizará automáticamente y reflejará los cambios gracias a Fast Refresh.
+Fragmento de código
+> DB_HOST=localhost
+DB_PORT=5000
+DB_NAME=ahorro_facil.db
+SECRET_KEY=clave_secreta_para_sesiones
 
-Si necesitas forzar una recarga completa:
 
-Android: Presiona la tecla <kbd>R</kbd> dos veces o selecciona "Reload" desde el Menú de Desarrollador (<kbd>Ctrl</kbd> + <kbd>M</kbd> en Windows/Linux).
 
-iOS: Presiona <kbd>R</kbd> en el Simulador de iOS.
 
-🚀 Detalles del Proyecto (Backend e Integración)
-Este proyecto ha sido integrado con un servidor local para cumplir con los requisitos de Persistencia de Datos y Control de Acceso.
+> **🛠️ Instalación y Ejecución**
+Sigue estos pasos en orden para asegurar la comunicación entre la App y el Servidor:
 
-Servidor: Flask (Python) ejecutándose en el puerto 5000.
+1. Levantar el Backend (Servidor Remoto)
+Navega a la carpeta: cd PROYECTO.
 
-Base de Datos: SQLite (ahorro_facil.db).
+* Instala las dependencias: pip install -r requirements.txt.
 
-Endpoints:
+* Inicia el servidor: python app.py.
 
-POST /register: Para el registro de nuevos usuarios.
+* Nota: El servidor correrá en http://127.0.0.1:5000.
 
-POST /login: Para la validación de credenciales.
+2. Iniciar el Frontend (App Móvil)
+* Abre una nueva terminal y navega a: cd ahorroFacilMobile.
+
+* Inicia Metro Bundler: npx react-native start.
+
+* En otra terminal (o presionando 'a' en la anterior), lanza la app: npx react-native run-android.
+
+
+✅ **Funcionalidades Verificadas**
+
+Registro con Selección de Rol: El sistema asigna automáticamente el rol 'User' a los nuevos registros, almacenándolos de forma remota.
+
+Inicio de Sesión: Validación de credenciales contra la base de datos SQLite.
+
+Vista Protegida: Una vez autenticado, el usuario accede al "Panel AhorroFácil", una sección restringida para usuarios no logueados.
+
+Cierre de Sesión (Logout): Botón funcional que destruye el estado de la sesión y retorna al usuario al Login.
+
+
+**✅ Declaración de Originalidad**
+
+Declaro que este proyecto ha sido desarrollado desde cero, configurando el entorno y la base de datos de manera independiente para cumplir con los objetivos de la asignatura.
